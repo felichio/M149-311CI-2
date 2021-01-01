@@ -3,7 +3,17 @@ db.requests.aggregate([
     {$group: {_id: {zip: "$zip_code", type: "$type_of_service_request"}, hits: {$sum: 1}}}, 
     {$sort: {"_id.zip": -1, hits: -1}}, 
     {$group: {_id: "$_id.zip", per_zip: {$push: {type: "$_id.type", hits: "$hits"}}}}, 
-    {$project: {_id: 0, zip_code: "$_id", topThreeTypes: {$slice: ["$per_zip", 0, 3]}}} 
+    {$project: {_id: 0, zip_code: "$_id", top_three_types: {$slice: ["$per_zip", 0, 3]}}} 
 ])
 
 // Date is parameter
+
+// New implementation
+
+db.requests.aggregate([
+    {$match: {$expr: {$eq: ["$creation_date", {$dateFromString: {dateString: "2015-04-13"}}]}}}, 
+    {$group: {_id: {zip: "$zip_code", type: "$type_of_service_request"}, hits: {$sum: 1}}}, 
+    {$sort: {"_id.zip": -1, hits: -1}}, 
+    {$group: {_id: "$_id.zip", per_zip: {$push: {type: "$_id.type", hits: "$hits"}}}}, 
+    {$project: {_id: 0, zip_code: "$_id", top_three_types: {$slice: ["$per_zip", 0, 3]}}} 
+])

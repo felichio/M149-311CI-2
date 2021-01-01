@@ -15,8 +15,10 @@ requests = db.requests
 citizens_ids = map(lambda x: x["_id"], citizens.find({}, {"_id": 1}))
 requests_ids = list(map(lambda x: x["_id"], requests.find({}, {"_id": 1})))
 
+random.seed(0)
+
 for (index, citizen_id) in enumerate(citizens_ids):
-    req_for_upvote = random.sample(requests_ids, random.randrange(0, constant.NUM_OF_UPVOTES))
+    req_for_upvote = random.sample(requests_ids, random.randrange(0, constant.NUM_OF_UPVOTES + 1))
     citizens.update_one({"_id": citizen_id}, {"$set": {"upvotes": req_for_upvote}})
     for upvoted in req_for_upvote:
         requests.update_one({"_id": upvoted}, {"$push": {"upvoted_by": citizen_id}})
