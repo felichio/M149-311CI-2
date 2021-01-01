@@ -32,3 +32,16 @@ db.requests.aggregate([
     {$sort: {total: -1}}, 
     {$limit: 50}
 ])
+
+
+// With add to Set
+
+db.requests.aggregate([{
+    $project: {_id: 1, ward: 1, upvoted_by: 1}}, 
+    {$unwind: "$upvoted_by"}, 
+    {$group: {_id: "$upvoted_by", ward: {$addToSet: "$ward"}}}, 
+    {$project: {upvoter: {$toString: "$_id"}, ward: {$size: "$ward"}}}, 
+    {$sort: {ward: -1}}, 
+    {$limit: 50}
+])
+
