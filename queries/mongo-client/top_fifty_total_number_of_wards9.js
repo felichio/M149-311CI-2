@@ -18,3 +18,17 @@ db.citizens.aggregate([
     {$sort: {wards: -1}}, 
     {$limit: 50}
 ])
+
+
+// New new Implementation
+
+db.requests.aggregate([ 
+    {$project: {_id: 1, ward: 1, upvoted_by: 1}}, 
+    {$unwind: "$upvoted_by" }, 
+    {$group:{_id: {up:"$upvoted_by", ward: "$ward"}}}, 
+    {$match: {"_id.ward": {$ne: null}}}, 
+    {$group: {_id: "$_id.up",total: {"$sum":1}}},
+    {$project: {"_id": {$toString: "$_id"}, total: "$total"}},
+    {$sort: {total: -1}}, 
+    {$limit: 50}
+])
