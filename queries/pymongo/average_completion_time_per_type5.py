@@ -20,4 +20,4 @@ def get_average_completion_time_per_type(start_date, end_date):
     return json.dumps(list(result))
 
 
-print(get_average_completion_time_per_type("2015-04-08", "2015-04-30"))
+# print(get_average_completion_time_per_type("2015-04-08", "2015-04-30"))

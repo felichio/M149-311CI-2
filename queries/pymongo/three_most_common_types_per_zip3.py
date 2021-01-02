@@ -21,4 +21,4 @@ def get_three_most_common_types_per_zip(start_date):
     return json.dumps(list(result))
 
 
-print(get_three_most_common_types_per_zip("2015-04-08"))
+# print(get_three_most_common_types_per_zip("2015-04-08"))

@@ -23,4 +23,4 @@ def get_incident_ids_same_phone():
     return json.dumps(list(result))
 
 
-print(get_incident_ids_same_phone())
+# print(get_incident_ids_same_phone())

@@ -20,4 +20,4 @@ def get_fifty_most_active_citizens():
     return json.dumps(list(result))
 
 
-print(get_fifty_most_active_citizens())
+# print(get_fifty_most_active_citizens())

@@ -20,4 +20,4 @@ def get_wards_name_has_casted_a_vote(name):
     return json.dumps(list(result))
 
 
-print(get_wards_name_has_casted_a_vote("Norma Fisher"))
+# print(get_wards_name_has_casted_a_vote("Norma Fisher"))

@@ -24,4 +24,4 @@ def get_top_fifty_total_number_of_wards():
     return json.dumps(list(result))
 
 
-print(get_top_fifty_total_number_of_wards())
+# print(get_top_fifty_total_number_of_wards())

@@ -21,4 +21,4 @@ def get_total_request_per_day(start_date, end_date, type):
     return json.dumps(list(result))
 
 
-print(get_total_request_per_day("2015-04-08", "2016-04-30", "Tree Trim"))
+# print(get_total_request_per_day("2015-04-08", "2016-04-30", "Tree Trim"))
