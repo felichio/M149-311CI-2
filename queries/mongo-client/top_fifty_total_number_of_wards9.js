@@ -39,8 +39,8 @@ db.requests.aggregate([
 
 // With add to Set
 
-db.requests.aggregate([{
-    $project: {_id: 1, ward: 1, upvoted_by: 1}}, 
+db.requests.aggregate([
+    {$project: {_id: 1, ward: 1, upvoted_by: 1}}, 
     {$unwind: "$upvoted_by"}, 
     {$group: {_id: "$upvoted_by", ward: {$addToSet: "$ward"}}}, 
     {$project: {upvoter: {$toString: "$_id"}, wards: {$size: "$ward"}}}, 

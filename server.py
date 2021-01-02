@@ -126,3 +126,36 @@ def _11():
     print(name)
     # Maybe validation
     return get_wards_name_has_casted_a_vote(name)
+
+
+@app.route("/request/<request_id>", methods = ["POST"])
+def upsert_request(request_id):
+    req_id = ObjectId(request_id)
+    
+
+    return "temp"
+
+@app.route("/citizen/<citizen_id>", methods = ["POST"])
+def upsert_citizen(citizen_id):
+    cit_id = ObjectId(citizen_id)
+
+    return "temp"
+
+
+@app.route("/upvote/<request_id>", methods = ["POST"])
+def upvote_request(request_id):
+    req_id = ObjectId(request_id)
+    # take citizen id from json payload
+    # do upvote logic  <= 1000, 2ble upvoting
+    print(req_id)
+
+    return "temp"
+
+
+@app.route("/downvote/<request_id>", methods = ["POST"])
+def downvote_request(request_id):
+    req_id = ObjectId(request_id)
+    print(req_id)
+    # take citizen id from json payload
+    # do downvote logic
+    return "temp"
