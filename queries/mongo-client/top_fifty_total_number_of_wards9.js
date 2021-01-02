@@ -8,6 +8,9 @@ db.citizens.aggregate([
 
 // Slow, need better implementation
 
+// Index
+
+db.requests.createIndex({upvoted_by: -1})
 
 // New implementation ObjectId to String
 
@@ -40,7 +43,7 @@ db.requests.aggregate([{
     $project: {_id: 1, ward: 1, upvoted_by: 1}}, 
     {$unwind: "$upvoted_by"}, 
     {$group: {_id: "$upvoted_by", ward: {$addToSet: "$ward"}}}, 
-    {$project: {upvoter: {$toString: "$_id"}, ward: {$size: "$ward"}}}, 
+    {$project: {upvoter: {$toString: "$_id"}, wards: {$size: "$ward"}}}, 
     {$sort: {ward: -1}}, 
     {$limit: 50}
 ])
