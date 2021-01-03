@@ -9,8 +9,8 @@ db = client.chicago_incidents
 citizens = db.citizens
 requests = db.requests
 
-def get_top_fifty_total_number_of_wards():
-    result = requests.aggregate([ 
+def get_top_fifty_total_number_of_wards(db):
+    result = db.requests.aggregate([ 
         {"$project": {"_id": 1, "ward": 1, "upvoted_by": 1}}, 
         {"$unwind": "$upvoted_by" }, 
         {"$group":{"_id":{"up":"$upvoted_by","ward": "$ward"}}}, 

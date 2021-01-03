@@ -2,15 +2,11 @@ from pymongo import MongoClient
 from bson.objectid import ObjectId
 import json
 
-client = MongoClient()
-
-db = client.chicago_incidents
-
-requests = db.requests
 
 
-def get_common_inside_bounding_box(bot_left, up_right, start_date):
-    result = requests.aggregate([
+
+def get_common_inside_bounding_box(db, bot_left, up_right, start_date):
+    result = db.requests.aggregate([
         {"$match": {"$expr": {"$eq": ["$creation_date", {"$dateFromString": {"dateString": start_date}}]}}},
         {"$match": {"location": {"$geoWithin": {"$box": [bot_left, up_right]}}}}, 
         {"$group": {"_id": "$type_of_service_request", "count": {"$sum": 1}}}, 

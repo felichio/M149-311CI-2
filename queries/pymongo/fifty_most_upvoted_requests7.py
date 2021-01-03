@@ -2,15 +2,11 @@ from pymongo import MongoClient
 from bson.objectid import ObjectId
 import json
 
-client = MongoClient()
-
-db = client.chicago_incidents
-
-requests = db.requests
 
 
-def get_fifty_most_upvoted_requests(start_date):
-    result = requests.aggregate([
+
+def get_fifty_most_upvoted_requests(db, start_date):
+    result = db.requests.aggregate([
         {"$match": {"$expr": {"$eq": ["$creation_date", {"$dateFromString": {"dateString": start_date}}]}}},
         {"$match": {"upvoted_by": {"$exists": True}}}, 
         {"$project": {"_id": {"$toString": "$_id"}, "upvotes": {"$size": "$upvoted_by"}}},

@@ -9,8 +9,8 @@ db = client.chicago_incidents
 requests = db.requests
 
 
-def get_total_request_per_day(start_date, end_date, type):
-    result = requests.aggregate([
+def get_total_request_per_day(db, start_date, end_date, type):
+    result = db.requests.aggregate([
         {"$match": {"type_of_service_request": type}}, 
         {"$match": {"$expr": {"$and": [{"$gte": ["$creation_date", {"$dateFromString": {"dateString": start_date}}]}, {"$lte": ["$creation_date", {"$dateFromString": {"dateString": end_date}}]}]}}}, 
         {"$group": {"_id": {"type": "$type_of_service_request", "creation": "$creation_date"}, "totalRequests": {"$sum": 1}}},

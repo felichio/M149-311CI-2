@@ -2,15 +2,10 @@ from pymongo import MongoClient
 from bson.objectid import ObjectId
 import json
 
-client = MongoClient()
-
-db = client.chicago_incidents
-
-citizens = db.citizens
 
 
-def get_incident_ids_same_phone():
-    result = citizens.aggregate([
+def get_incident_ids_same_phone(db):
+    result = db.citizens.aggregate([
         {"$group": {"_id": "$telephone", "persons": {"$sum": 1}, "requests": {"$push": "$upvotes"}}},
         {"$match": {"persons": {"$gte": 2}}},
         {"$unwind": "$requests" },
