@@ -128,18 +128,18 @@ def _11():
     return get_wards_name_has_casted_a_vote(db, name)
 
 
-@app.route("/request/<request_id>", methods = ["POST"])
-def upsert_request(request_id):
-    req_id = ObjectId(request_id)
+# @app.route("/request/<request_id>", methods = ["POST"])
+# def upsert_request(request_id):
+#     req_id = ObjectId(request_id)
     
 
-    return "temp"
+#     return "temp"
 
-@app.route("/citizen/<citizen_id>", methods = ["POST"])
-def upsert_citizen(citizen_id):
-    cit_id = ObjectId(citizen_id)
+# @app.route("/citizen/<citizen_id>", methods = ["POST"])
+# def upsert_citizen(citizen_id):
+#     cit_id = ObjectId(citizen_id)
 
-    return "temp"
+#     return "temp"
 
 
 @app.route("/upvote/<request_id>", methods = ["POST"])
